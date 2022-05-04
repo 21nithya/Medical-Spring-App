@@ -1,4 +1,4 @@
-package com.medicalapp.medicalapi.controller;
+package com.medicalapp.medicalapi.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,7 +16,7 @@ import lombok.ToString;
 @ToString 
 @Entity
 @Table(name="medical_display")
-public class ListProducts {
+public class Product {
 	@Id 
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="product_id")
@@ -29,7 +29,7 @@ public class ListProducts {
 	private String brandName;
 	
 	@Column(name="price", nullable=false)
-	private String price;
+	private Integer price;
 	
 	@Column(name="image", nullable=false)
 	private String image;

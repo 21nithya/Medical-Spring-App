@@ -1,12 +1,20 @@
-package com.medicalapp.medicalapi.controller;
+package com.medicalapp.medicalapi.repository;
 
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import com.medicalapp.medicalapi.model.Product;
+
+
+
+
+
+
+
 @Repository
-public interface ProductDAO extends JpaRepository<ListProducts,Integer>{
+public interface ProductRepository extends JpaRepository<Product,Integer>{
   
   //@Query("select u from com.medicalapp.medicalapi.controller.ListProducts u")
   //List<ListProducts> findAllProducts();
@@ -18,7 +26,7 @@ public interface ProductDAO extends JpaRepository<ListProducts,Integer>{
 //	List<ListProducts> findByName(String ListProductsName); 
   
 
-	List<ListProducts> findByProductNameContaining(String listProductsName);
+	List<Product> findByProductNameContaining(String listProductsName);
 }
  
 

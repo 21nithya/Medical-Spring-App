@@ -1,4 +1,4 @@
-package com.medicalapp.medicalapi.controller;
+package com.medicalapp.medicalapi.model;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

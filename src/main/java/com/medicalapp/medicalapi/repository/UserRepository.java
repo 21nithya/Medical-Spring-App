@@ -11,6 +11,8 @@ import com.medicalapp.medicalapi.model.User;
 
 
 
+
+
 @Repository
 public interface UserRepository extends JpaRepository<User,Integer>{
 

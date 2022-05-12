@@ -18,7 +18,7 @@ import lombok.ToString;
 		@Id 
 		@GeneratedValue(strategy = GenerationType.IDENTITY)
 		private Integer id;
-		@Column(name="name", nullable=false,length=100)
+		@Column(name="username", nullable=false,length=100)
 		private String name;
 		@Column(name="email", unique= true)
 		private String email;

@@ -23,19 +23,24 @@ public class MedicalService {
 			medicalValidation.medicalValidation(product);
 			productRepository.save(product);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			// e.printStackTrace();
 			throw new Exception(e.getMessage());
 		}
 	}
 
 	public Optional<Product> findById(Integer id) {
-		// TODO Auto-generated method stub
-		return null;
+		Optional<Product> product = productRepository.findById(id);
+		
+		return product;
 	}
 
-	public void deleteById(Integer id) {
-		// TODO Auto-generated method stub
+	public void deleteById(Integer id) throws Exception {
+		try {
+			productRepository.deleteById(id);
+		}
+		catch(Exception e) {
+			throw new Exception(e.getMessage());
+		}
 		
 	}
 

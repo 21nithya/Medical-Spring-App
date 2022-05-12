@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.medicalapp.medicalapi.MessageDTO;
 import com.medicalapp.medicalapi.model.Product;
 import com.medicalapp.medicalapi.service.MedicalService;
 
@@ -27,16 +29,19 @@ public class ProductController {
 	MedicalService medicalService;
 
 
-	@PostMapping("Product/save")
-	public ResponseEntity<String> save(@RequestBody Product product) {
-		//String result ="Successs";
+	@PostMapping("Product/save")//insert product
+	public ResponseEntity<?> save(@RequestBody Product product) {
+		
+	
 		try {
 			
 			medicalService.save(product);
-			return new ResponseEntity<String>("Success", HttpStatus.OK);
+			MessageDTO message=new MessageDTO("Success");
+			return new ResponseEntity<>(message, HttpStatus.OK);
 		}
 		catch(Exception e){
-			return new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
+			MessageDTO message=new MessageDTO(e.getMessage());
+			return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
 		}
 	}
 
@@ -52,7 +57,7 @@ public class ProductController {
 		return list;
 	}
 
-	@PutMapping("Product/{id}") // update
+	@PutMapping("Product/update/{id}") // update products
 	public void update(@PathVariable("id") Integer id, @RequestBody Product product) {
 		product.setId(id);
 		try {
@@ -63,9 +68,16 @@ public class ProductController {
 		}
 	}
 
-	@DeleteMapping("Product/{id}")
-	public void delete(@PathVariable("id") Integer id, @RequestBody Product product) {
-		medicalService.deleteById(id);
+	@DeleteMapping("Product/delete/{id}")//delete products
+	public ResponseEntity<?> delete(@PathVariable("id") Integer id) {
+		try {
+			medicalService.deleteById(id);
+			MessageDTO message=new MessageDTO("Success");
+			return new ResponseEntity<>(HttpStatus.OK);
+		} catch (Exception e) {
+			MessageDTO message=new MessageDTO(e.getMessage());
+			return new ResponseEntity<>(message,HttpStatus.BAD_REQUEST);
+		}
 
 	}
 
@@ -81,7 +93,7 @@ public class ProductController {
 			return null;
 		}
    }
-	@GetMapping("ListProducts/name")
+	@GetMapping("ListProducts/name")//find by name
 	public List<Product> findByName(@RequestParam("name") String ListProductsName) throws Exception {
 		System.out.println(ListProductsName);
 		List<Product> list= medicalService.findAll();
